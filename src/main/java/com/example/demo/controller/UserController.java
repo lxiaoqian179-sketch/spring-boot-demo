@@ -5,7 +5,6 @@ import com.example.demo.model.User;
 import com.example.demo.service.UserService;//剛才寫的 Service
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;//處理 GET 請求的標籤
 import java.util.List;
 
 @RestController
@@ -30,7 +29,7 @@ public class UserController {//告訴 Spring Boot「這個類別負責接收 HTT
             return ResponseEntity.status(404).body("使用者不存在");
         }
         return ResponseEntity.ok(user);
-    }
+        }
 
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody User user) {
