@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot Demo</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
+        input { display: block; margin: 8px 0; padding: 8px; width: 100%; box-sizing: border-box; }
+        button { padding: 8px 20px; margin-top: 8px; cursor: pointer; }
+        pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+        .error { color: red; }
+        .success { color: green; }
+        hr { margin: 32px 0; }
+    </style>
+</head>
+<body>
+
+<h2>登入</h2>
+<input id="username" placeholder="帳號" value="bob2"/>
+<input id="password" type="password" placeholder="密碼" value="123456"/>
+<button onclick="login()">登入</button>
+<p id="login-result"></p>
+
+<hr>
+
+<h2>使用者列表 <small>（需要登入）</small></h2>
+<button onclick="getUsers()">取得 /users</button>
+<pre id="users-result">尚未取得</pre>
+
+<script>
+    // ① 設定 base URL
+    const BASE_URL = 'http://localhost:8080';
+
+    // ② 取出存起來的 token
+    function getToken() {
+      return localStorage.getItem('token');
+    }
+
+    // ③ 登入 API，成功後把 token 存起來
+    async function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const resultEl = document.getElementById('login-result');
+
+      try {
+        const res = await fetch(`${BASE_URL}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.data?.token) {
+          localStorage.setItem('token', data.data.token); // 存 token
+          resultEl.className = 'success';
+          resultEl.textContent = '登入成功！token 已儲存';
+        } else {
+          resultEl.className = 'error';
+          resultEl.textContent = '登入失敗：' + (data.message || '未知錯誤');
+        }
+      } catch (e) {
+        resultEl.className = 'error';
+        resultEl.textContent = '連線失敗，確認伺服器有在跑';
+      }
+    }
+
+    // ④ 每次請求都在 Header 帶上 token
+    async function getUsers() {
+      const resultEl = document.getElementById('users-result');
+      const token = getToken();
+
+      if (!token) {
+        resultEl.textContent = '請先登入';
+        return;
+      }
+
+      try {
+        const res = await fetch(`${BASE_URL}/users`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`  // ← 帶 token
+          }
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          resultEl.textContent = JSON.stringify(data, null, 2);
+        } else {
+          resultEl.textContent = '失敗：' + JSON.stringify(data);
+        }
+      } catch (e) {
+        resultEl.textContent = '連線失敗，確認伺服器有在跑';
+      }
+    }
+</script>
+
+</body>
+</html>

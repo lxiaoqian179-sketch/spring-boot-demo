@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login").permitAll() // 登入不需要 token
+                        .requestMatchers("/", "/index.html", "/**.css", "/**.js").permitAll() // 加這行
                         .anyRequest().authenticated()              // 其他都需要 token
                 )
                 .addFilterBefore(jwtFilter,
