@@ -31,6 +31,10 @@ public class JwtFilter extends OncePerRequestFilter {
         // 從 header 取出 Authorization
         String authHeader = request.getHeader("Authorization");
 
+        // 加這兩行
+        System.out.println("=== JwtFilter 收到請求: " + request.getMethod() + " " + request.getRequestURI());
+        System.out.println("=== Authorization header: " + authHeader);
+
         // 有帶 token 才驗證
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7); // 拿掉 "Bearer " 前綴

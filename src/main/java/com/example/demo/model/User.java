@@ -3,6 +3,7 @@ package com.example.demo.model;
 //這個類別是資料的模型，對應到資料庫的 users 表。
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
     private Integer id;
@@ -26,9 +27,15 @@ public class User {
     public void setUsername(String username) { this.username = username; }
 
 
-    @JsonIgnore
+//    @JsonIgnore
+//    public String getPassword() { return password; }
+//    public void setPassword(String password) { this.password = password; }
+
+    // 把原本的 @JsonIgnore 拿掉，改成這樣：
+//    把 @JsonIgnore 改成只忽略輸出，不忽略輸入
+    @JsonProperty
+    (access = JsonProperty.Access.WRITE_ONLY)
     public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
 }
 //getId() / setId() 這類方法叫做 getter / setter，讓其他類別可以存取這些私有變數
 

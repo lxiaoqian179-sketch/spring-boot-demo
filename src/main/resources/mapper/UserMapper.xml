@@ -2,29 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-<!-- namespace  對應到哪個 Mapper 介面-->
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
-<!-- id="findAll"   對應介面裡的哪個方法-->
-<!-- resultType="User" 查詢結果要轉換成 User 物件-->
     <select id="findAll" resultType="User">
         SELECT * FROM users
-        <!-- SELECT * FROM users       實際執行的 SQL-->
     </select>
 
-
-<!--用id查詢單筆-->
     <select id="findById" resultType="User">
         SELECT * FROM users WHERE id = #{id}
     </select>
 
     <insert id="insert" parameterType="User">
-        INSERT INTO users (name, email) VALUES (#{name}, #{email})
+        INSERT INTO users (name, email, username, password)
+        VALUES (#{name}, #{email}, #{username}, #{password})
     </insert>
 
     <update id="update" parameterType="User">
-        UPDATE users SET name=#{name}, email=#{email} WHERE id=#{id}
+        UPDATE users SET name=#{name}, email=#{email}, username=#{username}, password=#{password}
+        WHERE id=#{id}
     </update>
 
     <delete id="delete" parameterType="Integer">
@@ -36,6 +31,3 @@
     </select>
 
 </mapper>
-
-<!--UserMapper.xml（SQL 層）-->
-<!-- 用一句話說：「寫實際要執行的 SQL 語法」-->
