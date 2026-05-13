@@ -4,6 +4,7 @@ import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;//剛才寫的那個類別，這裡要用到它
 import org.springframework.stereotype.Service;//Spring Boot 的標籤
 import java.util.List;//清單資料結構
+import java.util.Optional;
 
 @Service//告訴 Spring Boot「這個類別負責處理商業邏輯」
 public class UserService {
@@ -35,6 +36,11 @@ public class UserService {
 
     public void deleteUser(Integer id) {
         userRepository.delete(id);
+    }
+
+    // UserService.java 加這個方法
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }
 //定義一個函式：

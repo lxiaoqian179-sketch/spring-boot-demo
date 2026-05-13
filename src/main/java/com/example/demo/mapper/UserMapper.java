@@ -5,6 +5,8 @@ package com.example.demo.mapper;
 import com.example.demo.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
+import java.util.Optional;
+
 
 //@Mapper → 告訴 Spring Boot 這是 MyBatis 的 Mapper，自動處理實作
 //findAll() → 宣告一個查詢全部資料的方法
@@ -15,6 +17,9 @@ public interface UserMapper {
     void update(User user);
     void delete(Integer id);
     User findById(Integer id);//「查單筆」的 API
+
+
+    Optional<User> findByUsername(String username);
 }
 
 //用一句話說：「定義要對資料庫做什麼操作」

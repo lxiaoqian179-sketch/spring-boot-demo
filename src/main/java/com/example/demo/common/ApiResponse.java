@@ -24,6 +24,10 @@ public class ApiResponse<T> {
         return new ApiResponse<>(404, message, null);
     }
 
+    public static <T> ApiResponse<T> error(String message) {
+        return new ApiResponse<>(401, message, null);
+    }
+
     public int getCode() { return code; }
     public String getMessage() { return message; }
     public T getData() { return data; }

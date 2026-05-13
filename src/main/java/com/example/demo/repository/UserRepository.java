@@ -23,8 +23,10 @@ package com.example.demo.repository;
 
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.model.User;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepository {
@@ -45,7 +47,6 @@ public class UserRepository {
 //    用id查詢單筆 findById
 
 
-
     public void insert(User user) {
         userMapper.insert(user);
     }
@@ -56,6 +57,11 @@ public class UserRepository {
 
     public void delete(Integer id) {
         userMapper.delete(id);
+    }
+
+
+    public Optional<User> findByUsername(String username) {
+        return userMapper.findByUsername(username);
     }
 }
 //這層是橋樑，Service 不直接呼叫 Mapper，而是透過 Repository：

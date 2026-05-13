@@ -30,6 +30,11 @@
     <delete id="delete" parameterType="Integer">
         DELETE FROM users WHERE id=#{id}
     </delete>
+
+    <select id="findByUsername" resultType="com.example.demo.model.User">
+        SELECT * FROM users WHERE username = #{username}
+    </select>
+
 </mapper>
 
 <!--UserMapper.xml（SQL 層）-->
