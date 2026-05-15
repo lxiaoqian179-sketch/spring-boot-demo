@@ -31,6 +31,7 @@
 | DELETE | /users/{id} | 刪除使用者 | 是 |
 | GET | /orders | 取得所有訂單 | 是 |
 | GET | /users/{id}/orders | 取得使用者訂單 | 是 |
+| GET | /users?name={name} | 依名字查詢使用者 | 是 |
 
 ## 部署資訊
 
