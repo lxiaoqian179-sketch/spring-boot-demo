@@ -4,20 +4,20 @@
 
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
-    <select id="findAll" resultType="User">
+    <select id="findAll" resultType="com.example.demo.model.User">
         SELECT * FROM users
     </select>
 
-    <select id="findById" resultType="User">
+    <select id="findById" resultType="com.example.demo.model.User">
         SELECT * FROM users WHERE id = #{id}
     </select>
 
-    <insert id="insert" parameterType="User">
+    <insert id="insert" parameterType="com.example.demo.model.User">
         INSERT INTO users (name, email, username, password)
         VALUES (#{name}, #{email}, #{username}, #{password})
     </insert>
 
-    <update id="update" parameterType="User">
+    <update id="update" parameterType="com.example.demo.model.User">
         UPDATE users SET name=#{name}, email=#{email}, username=#{username}, password=#{password}
         WHERE id=#{id}
     </update>

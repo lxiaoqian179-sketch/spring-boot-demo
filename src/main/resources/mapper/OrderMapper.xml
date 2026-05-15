@@ -4,11 +4,11 @@
 
 <mapper namespace="com.example.demo.mapper.OrderMapper">
 
-    <select id="findAll" resultType="Order">
+    <select id="findAll" resultType="com.example.demo.model.Order">
         SELECT * FROM orders
     </select>
 
-    <select id="findByUserId" resultType="Order">
+    <select id="findByUserId" resultType="com.example.demo.model.Order">
         SELECT * FROM orders WHERE user_id = #{userId}
     </select>
 
