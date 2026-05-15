@@ -32,6 +32,7 @@
 | GET | /orders | 取得所有訂單 | 是 |
 | GET | /users/{id}/orders | 取得使用者訂單 | 是 |
 | GET | /users?name={name} | 依名字查詢使用者 | 是 |
+| GET | /orders?status={status} | 依狀態篩選訂單 | 是 |
 
 ## 部署資訊
 
@@ -64,3 +65,18 @@ nohup java -jar /home/demo/demo-0.0.1-SNAPSHOT.jar \
   --spring.config.location=file:/home/demo/application.properties \
   > /home/demo/app.log 2>&1 &
 ```
+## 開發流程
+
+本專案採用 Feature Branch 開發流程：
+
+1. 從 `main` 建立 feature branch：`git checkout -b feature/xxx`
+2. 開發完成後 commit（使用 Conventional Commits 格式）
+3. Push 到遠端並開 Pull Request
+4. Code Review 後 merge 進 `main`
+5. 刪除已合併的 branch
+
+### Branch 命名規則
+- `feature/` → 新功能
+- `fix/` → 修 bug
+- `refactor/` → 重構
+- `docs/` → 文件更新
