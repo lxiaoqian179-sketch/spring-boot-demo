@@ -19,7 +19,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
+    // branch B 的修改
     @GetMapping
 //    public ResponseEntity<ApiResponse<List<User>>> getUsers() {
 //        return ResponseEntity.ok(ApiResponse.success(userService.getAllUsers()));
