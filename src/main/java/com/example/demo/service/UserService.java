@@ -42,7 +42,16 @@ public class UserService {
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+//    public User findByName(String name) {
+//        return userMapper.findByName(name);
+//    }
+
+    public User findByName(String name) {
+        return userRepository.findByName(name);
+        }
 }
 //定義一個函式：
 //呼叫 userRepository.findAll() 去拿資料
 //把結果直接回傳出去
+

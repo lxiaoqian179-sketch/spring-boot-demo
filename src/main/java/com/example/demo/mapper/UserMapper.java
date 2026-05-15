@@ -4,6 +4,8 @@ package com.example.demo.mapper;
 
 import com.example.demo.model.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,9 @@ public interface UserMapper {
 
 
     Optional<User> findByUsername(String username);
+
+    User findByName(@Param("name") String name);
 }
 
 //用一句話說：「定義要對資料庫做什麼操作」
+

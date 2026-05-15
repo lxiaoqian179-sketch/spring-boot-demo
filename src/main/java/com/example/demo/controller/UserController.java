@@ -21,9 +21,19 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<User>>> getUsers() {
-        return ResponseEntity.ok(ApiResponse.success(userService.getAllUsers()));
-    }
+//    public ResponseEntity<ApiResponse<List<User>>> getUsers() {
+//        return ResponseEntity.ok(ApiResponse.success(userService.getAllUsers()));
+//    }
+
+        public ResponseEntity<ApiResponse<Object>> getUsers(
+                @RequestParam(required = false) String name) {
+            if (name != null) {
+                User user = userService.findByName(name);
+                return ResponseEntity.ok(ApiResponse.success(user));
+            }
+            List<User> users = userService.getAllUsers();
+            return ResponseEntity.ok(ApiResponse.success(users));
+        }
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<?>> getUserById(@PathVariable Integer id) {
