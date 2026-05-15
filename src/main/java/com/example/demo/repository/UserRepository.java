@@ -41,6 +41,10 @@ public class UserRepository {
         return userMapper.findAll();
     }
 
+    public User findByName(String name) {
+        return userMapper.findByName(name);
+    }
+
     public User findById(Integer id) {
         return userMapper.findById(id);
     }
