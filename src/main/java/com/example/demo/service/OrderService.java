@@ -21,4 +21,9 @@ public class OrderService {
     public List<Order> getOrdersByUserId(Integer userId) {
         return orderRepository.findByUserId(userId);
     }
+
+
+    public List<Order> findByStatus(String status) {
+        return orderRepository.findByStatus(status);
+    }
 }

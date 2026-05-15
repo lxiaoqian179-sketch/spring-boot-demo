@@ -21,4 +21,8 @@ public class OrderRepository {
     public List<Order> findByUserId(Integer userId) {
         return orderMapper.findByUserId(userId);
     }
+
+    public List<Order> findByStatus(String status) {
+        return orderMapper.findByStatus(status);
+    }
 }
