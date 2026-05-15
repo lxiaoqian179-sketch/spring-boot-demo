@@ -12,6 +12,10 @@
         SELECT * FROM orders WHERE user_id = #{userId}
     </select>
 
+    <select id="findByStatus" resultType="com.example.demo.model.Order">
+        SELECT * FROM orders WHERE status = #{status}
+    </select>
+
 
 
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -16,9 +17,20 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/orders")
-    public ResponseEntity<ApiResponse<List<Order>>> getAllOrders() {
-        return ResponseEntity.ok(ApiResponse.success(orderService.getAllOrders()));
+//    @GetMapping("/orders")
+//    public ResponseEntity<ApiResponse<List<Order>>> getAllOrders() {
+//        return ResponseEntity.ok(ApiResponse.success(orderService.getAllOrders()));
+//    }
+
+    @GetMapping
+    public ResponseEntity<ApiResponse<Object>> getOrders(
+            @RequestParam(required = false) String status) {
+        if (status != null) {
+            List<Order> orders = orderService.findByStatus(status);
+            return ResponseEntity.ok(ApiResponse.success(orders));
+        }
+        List<Order> orders = orderService.getAllOrders();
+        return ResponseEntity.ok(ApiResponse.success(orders));
     }
 
     @GetMapping("/users/{id}/orders")
